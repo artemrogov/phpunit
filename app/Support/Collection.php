@@ -29,9 +29,16 @@ class Collection implements IteratorAggregate {
 
 
   }
-  public function merge(Collection $collection){
+  public function add(array $items){
 
-      return new Collection(array_merge($this->get(),$collection->get()));
+    $this->items = array_merge($this->items,$items);
 
   }
+  public function merge(Collection $collection){
+
+    //  return new Collection(array_merge($this->get(),$collection->get()));
+
+    return $this->add($collection->get());
+  }
+  
 }

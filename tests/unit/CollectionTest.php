@@ -8,7 +8,7 @@ class CollectionTest extends TestCase {
 
   /** @test */
   public function empty_instantiated_collection_returns_no_items(){
-    
+
     $collection = new \App\Support\Collection;
 
     $this->assertEmpty($collection->get());
@@ -16,16 +16,24 @@ class CollectionTest extends TestCase {
 
   /** @test */
   public function count_is_correct_for_items_passed_in(){
+
       $collection = new \App\Support\Collection([
+
         'one','two','three'
+
       ]);
+
       $this->assertEquals(3,$collection->count());
   }
   /** @test */
   public function items_returnde_match_items_passed_in(){
+
     $collection = new \App\Support\Collection([
+
       'one','two'
+
     ]);
+
     $this->assertCount(2, $collection->get());
 
     $this->assertEquals($collection->get()[0],'one');
@@ -35,6 +43,7 @@ class CollectionTest extends TestCase {
   /** @test */
 
   public function collection_is_instance_of_iterator_aggregate(){
+
     $collection = new \App\Support\Collection();
 
     $this->assertInstanceOf(IteratorAggregate::class,$collection);
@@ -42,7 +51,6 @@ class CollectionTest extends TestCase {
   }
   /** @test */
   public function collection_can_be_iterated(){
-
 
       $collection = new \App\Support\Collection(['one','two','three']);
 
@@ -58,7 +66,6 @@ class CollectionTest extends TestCase {
 
       $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
 
-
   }
 
   /** @test */
@@ -68,12 +75,24 @@ class CollectionTest extends TestCase {
 
       $collection2 = new \App\Support\Collection(['three','four', 'five']);
 
-      $newCollection = $collection1->merge($collection2);
+      $collection1->merge($collection2);
 
-      $this->assertCount(5, $newCollection->get());
+      $this->assertCount(5, $collection1->get());
 
-      $this->assertEquals(5,$newCollection->count());
+      $this->assertEquals(5,$collection1->count());
 
+  }
+  /**@test */
+
+  public function add_can_collection_exists(){
+
+    $collection = new \App\Support\Collection(['one','two','three']);
+
+    $collection->add(['three']);
+
+    $this->assertEquals(3, $collection->count());
+
+    $this->assertCount(3,$collection->get());
 
 
   }
