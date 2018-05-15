@@ -5,8 +5,10 @@
 use PHPUnit\Framework\TestCase;
 
 class CollectionTest extends TestCase {
+
   /** @test */
   public function empty_instantiated_collection_returns_no_items(){
+    
     $collection = new \App\Support\Collection;
 
     $this->assertEmpty($collection->get());
@@ -25,7 +27,9 @@ class CollectionTest extends TestCase {
       'one','two'
     ]);
     $this->assertCount(2, $collection->get());
+
     $this->assertEquals($collection->get()[0],'one');
+
     $this->assertEquals($collection->get()[1],'two');
   }
   /** @test */
@@ -36,8 +40,42 @@ class CollectionTest extends TestCase {
     $this->assertInstanceOf(IteratorAggregate::class,$collection);
 
   }
-  /* @test */
+  /** @test */
   public function collection_can_be_iterated(){
-    
+
+
+      $collection = new \App\Support\Collection(['one','two','three']);
+
+      $items = [];
+
+      foreach($collection as $item){
+
+        $items[] = $item;
+
+      }
+
+      $this->assertCount(3,$items);
+
+      $this->assertInstanceOf(ArrayIterator::class, $collection->getIterator());
+
+
   }
+
+  /** @test */
+  public function collection_can_be_merged_with_another_collection(){
+
+      $collection1 = new \App\Support\Collection(['one','two']);
+
+      $collection2 = new \App\Support\Collection(['three','four', 'five']);
+
+      $newCollection = $collection1->merge($collection2);
+
+      $this->assertCount(5, $newCollection->get());
+
+      $this->assertEquals(5,$newCollection->count());
+
+
+
+  }
+
 }
