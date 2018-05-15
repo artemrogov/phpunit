@@ -1,4 +1,9 @@
 <?php
+/**
+  *author: Artem Rogov
+  *project: Learn UnitTest for Collection
+  *date: 20.05.18
+*/
 namespace App\Support;
 use IteratorAggregate;
 use ArrayIterator;
@@ -40,5 +45,12 @@ class Collection implements IteratorAggregate {
 
     return $this->add($collection->get());
   }
-  
+
+  public function toJson(){
+
+
+    return json_encode($this->items);
+
+  }
+
 }

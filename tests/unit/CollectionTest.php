@@ -12,6 +12,7 @@ class CollectionTest extends TestCase {
     $collection = new \App\Support\Collection;
 
     $this->assertEmpty($collection->get());
+
   }
 
   /** @test */
@@ -41,7 +42,6 @@ class CollectionTest extends TestCase {
     $this->assertEquals($collection->get()[1],'two');
   }
   /** @test */
-
   public function collection_is_instance_of_iterator_aggregate(){
 
     $collection = new \App\Support\Collection();
@@ -83,7 +83,6 @@ class CollectionTest extends TestCase {
 
   }
   /**@test */
-
   public function add_can_collection_exists(){
 
     $collection = new \App\Support\Collection(['one','two','three']);
@@ -94,6 +93,22 @@ class CollectionTest extends TestCase {
 
     $this->assertCount(3,$collection->get());
 
+
+  }
+/** @test */
+  public function returns_json_encoded_items(){
+
+      $collection = new \App\Support\Collection([
+
+        ['username'=>'alex'],
+
+        ['username'=>'billy'],
+
+      ]);
+
+      $this->assertInternalType('string',$collection->toJson());
+
+      $this->assertEquals('[{"username":"alex"},{"username":"billy"}]',$collection->toJson());
 
   }
 
