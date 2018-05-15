@@ -14,16 +14,19 @@ private $_name;
 
 private $_lastname;
 
+private $_email;
+
+
 public function setFirstName($name){
 
 
-  $this->_name = $name;
+  $this->_name = trim($name);
 
 
 }
 public function setLastName($param){
 
-  $this->_lastname = $param;
+  $this->_lastname = trim($param);
 
 
 }
@@ -45,5 +48,23 @@ public function getFullName(){
 
   return $this->_name .' '. $this->_lastname;
 }
+public function setEmailAddress($email)
+{
 
+  $this->_email = $email;
+
+}
+public function getEmailAddress(){
+
+  return $this->_email;
+
+}
+public function getEmailVariables(){
+
+  return [
+      'full_name'=>$this->getFullName(),
+      'email'=>$this->getEmailAddress(),
+
+  ];
+}
 }
