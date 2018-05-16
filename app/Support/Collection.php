@@ -18,6 +18,8 @@ class Collection implements IteratorAggregate, JsonSerializable {
 
 
     $this->items = $items;
+
+
   }
 
   public function get(){
@@ -42,7 +44,7 @@ class Collection implements IteratorAggregate, JsonSerializable {
   }
   public function merge(Collection $collection){
 
-    //  return new Collection(array_merge($this->get(),$collection->get()));
+
 
     return $this->add($collection->get());
   }
@@ -55,7 +57,7 @@ class Collection implements IteratorAggregate, JsonSerializable {
   }
   public function jsonSerialize(){
     return $this->items;
-    
+
   }
 
 }
