@@ -23,6 +23,6 @@ echo "\n";
 
 $test1 = new Additional;
 
-$test1->setOperands([]);
+$test1->setOperands([3,1]);
 
 echo $test1->calculate();
